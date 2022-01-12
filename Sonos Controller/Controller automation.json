@@ -1,0 +1,1682 @@
+### NodeRed config for the Sonos controller ###
+
+[
+    {
+        "id": "5af774318f0b0278",
+        "type": "group",
+        "z": "ff87fc0c.05133",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "d1e89b3f9ab83806",
+            "3b2849c176907070",
+            "bde2b744bf2237f9",
+            "73b7612f20d206d8",
+            "62395f0ac4427614",
+            "9750c0c871d942d3",
+            "a33c9f122e502d06",
+            "11a7617229db7c92",
+            "ddcd1994163b322d",
+            "b0e1a30ef6a89927",
+            "4f38db2eccd35858",
+            "70d6c51ecd261a5b",
+            "5d046d15f1c2fa3a",
+            "15dcd3c4f278d941",
+            "803d86fd8b427ad1",
+            "662473182996af2d",
+            "f30954dae66a026f",
+            "8fa319ed566572a6",
+            "8b6a6ab3b285d0fe",
+            "61fbcb29fb42addb",
+            "d5c27e098e7a6f7f",
+            "b97eef2fe340b586",
+            "9a9efe8f435ec8de",
+            "046a88898998db46",
+            "ab3273e87515aa5f"
+        ],
+        "x": 34,
+        "y": 2119,
+        "w": 512,
+        "h": 562
+    },
+    {
+        "id": "faa96027a1de9b63",
+        "type": "subflow",
+        "name": "Sonos kontroller",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 80,
+                "y": 160,
+                "wires": [
+                    {
+                        "id": "f5cb9a56b21140d3"
+                    }
+                ]
+            }
+        ],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "c046bee468f9c6a7",
+        "type": "api-call-service",
+        "z": "faa96027a1de9b63",
+        "name": "Send media_{{button}}",
+        "server": "ac20270b.4d8de8",
+        "version": 3,
+        "debugenabled": true,
+        "service_domain": "media_player",
+        "service": "media_{{button}}",
+        "entityId": "{{sonos}}",
+        "data": "",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 540,
+        "y": 60,
+        "wires": [
+            [
+                "5a0b9a013ac21572"
+            ]
+        ]
+    },
+    {
+        "id": "14cde03c695173e7",
+        "type": "api-call-service",
+        "z": "faa96027a1de9b63",
+        "name": "Reset {{button}}",
+        "server": "ac20270b.4d8de8",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "input_boolean",
+        "service": "turn_off",
+        "entityId": "input_boolean.{{button}}_{{input_boolean_room}}_sonos",
+        "data": "",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 1100,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5a0b9a013ac21572",
+        "type": "delay",
+        "z": "faa96027a1de9b63",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "500",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 930,
+        "y": 240,
+        "wires": [
+            [
+                "14cde03c695173e7"
+            ]
+        ]
+    },
+    {
+        "id": "35f5bd770cb15078",
+        "type": "comment",
+        "z": "faa96027a1de9b63",
+        "name": "Sonos kontroller sub flow",
+        "info": "",
+        "x": 190,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "add26b8b7d3c41b8",
+        "type": "api-call-service",
+        "z": "faa96027a1de9b63",
+        "name": "Send false",
+        "server": "ac20270b.4d8de8",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "media_player",
+        "service": "shuffle_set",
+        "entityId": "{{sonos}}",
+        "data": "{\"shuffle\":\"false\"}",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 650,
+        "y": 200,
+        "wires": [
+            [
+                "5a0b9a013ac21572"
+            ]
+        ]
+    },
+    {
+        "id": "fca4fc79d677f86c",
+        "type": "api-call-service",
+        "z": "faa96027a1de9b63",
+        "name": "Send true",
+        "server": "ac20270b.4d8de8",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "media_player",
+        "service": "shuffle_set",
+        "entityId": "{{sonos}}",
+        "data": "{\"shuffle\":\"true\"}",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 640,
+        "y": 146,
+        "wires": [
+            [
+                "5a0b9a013ac21572"
+            ]
+        ]
+    },
+    {
+        "id": "5eb82215c0261a16",
+        "type": "switch",
+        "z": "faa96027a1de9b63",
+        "name": "Switch",
+        "property": "payload.attributes.shuffle",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 490,
+        "y": 180,
+        "wires": [
+            [
+                "fca4fc79d677f86c"
+            ],
+            [
+                "add26b8b7d3c41b8"
+            ]
+        ]
+    },
+    {
+        "id": "f5cb9a56b21140d3",
+        "type": "switch",
+        "z": "faa96027a1de9b63",
+        "name": "Service",
+        "property": "button",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "play",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "pause",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "previous",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "next",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "shuffle",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "repeat",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "vol_up",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "vol_down",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 8,
+        "x": 200,
+        "y": 160,
+        "wires": [
+            [
+                "c046bee468f9c6a7"
+            ],
+            [
+                "c046bee468f9c6a7"
+            ],
+            [
+                "a5c538497c4cf16f"
+            ],
+            [
+                "a5c538497c4cf16f"
+            ],
+            [
+                "d067f5f3e267aa3b"
+            ],
+            [
+                "ae52dedcfff3e430"
+            ],
+            [
+                "43f7f77547b124e6"
+            ],
+            [
+                "1d2006ba04e7f755"
+            ]
+        ]
+    },
+    {
+        "id": "1642ccc27080ca01",
+        "type": "switch",
+        "z": "faa96027a1de9b63",
+        "name": "Switch",
+        "property": "payload.attributes.repeat",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "off",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "all",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "one",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 490,
+        "y": 300,
+        "wires": [
+            [
+                "6b028208793ecb28"
+            ],
+            [
+                "c8600a2b210aae85"
+            ],
+            [
+                "333f29f2608d6d4e"
+            ]
+        ]
+    },
+    {
+        "id": "6b028208793ecb28",
+        "type": "api-call-service",
+        "z": "faa96027a1de9b63",
+        "name": "Send all",
+        "server": "ac20270b.4d8de8",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "media_player",
+        "service": "repeat_set",
+        "entityId": "{{sonos}}",
+        "data": "{\"repeat\":\"all\"}",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 640,
+        "y": 255,
+        "wires": [
+            [
+                "5a0b9a013ac21572"
+            ]
+        ]
+    },
+    {
+        "id": "c8600a2b210aae85",
+        "type": "api-call-service",
+        "z": "faa96027a1de9b63",
+        "name": "Send one",
+        "server": "ac20270b.4d8de8",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "media_player",
+        "service": "repeat_set",
+        "entityId": "{{sonos}}",
+        "data": "{\"repeat\":\"one\"}",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 640,
+        "y": 300,
+        "wires": [
+            [
+                "5a0b9a013ac21572"
+            ]
+        ]
+    },
+    {
+        "id": "333f29f2608d6d4e",
+        "type": "api-call-service",
+        "z": "faa96027a1de9b63",
+        "name": "Send off",
+        "server": "ac20270b.4d8de8",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "media_player",
+        "service": "repeat_set",
+        "entityId": "{{sonos}}",
+        "data": "{\"repeat\":\"off\"}",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 640,
+        "y": 347,
+        "wires": [
+            [
+                "5a0b9a013ac21572"
+            ]
+        ]
+    },
+    {
+        "id": "43f7f77547b124e6",
+        "type": "api-current-state",
+        "z": "faa96027a1de9b63",
+        "name": "Status",
+        "server": "ac20270b.4d8de8",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "{{sonos}}",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "for": 0,
+        "forType": "num",
+        "forUnits": "minutes",
+        "x": 350,
+        "y": 400,
+        "wires": [
+            [
+                "634a7efcc0e72e09"
+            ]
+        ]
+    },
+    {
+        "id": "634a7efcc0e72e09",
+        "type": "api-call-service",
+        "z": "faa96027a1de9b63",
+        "name": "Vol UP",
+        "server": "ac20270b.4d8de8",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "media_player",
+        "service": "volume_set",
+        "entityId": "{{sonos}}",
+        "data": "{\"volume_level\":payload.attributes.volume_level + 0.02}",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 630,
+        "y": 400,
+        "wires": [
+            [
+                "5351ea8fb92009e8"
+            ]
+        ]
+    },
+    {
+        "id": "5351ea8fb92009e8",
+        "type": "delay",
+        "z": "faa96027a1de9b63",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "250",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 930,
+        "y": 300,
+        "wires": [
+            [
+                "14cde03c695173e7"
+            ]
+        ]
+    },
+    {
+        "id": "7d57a21cb25e4aec",
+        "type": "api-call-service",
+        "z": "faa96027a1de9b63",
+        "name": "Vol DOWN",
+        "server": "ac20270b.4d8de8",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "media_player",
+        "service": "volume_set",
+        "entityId": "{{sonos}}",
+        "data": "{\"volume_level\":payload.attributes.volume_level - 0.02}",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 650,
+        "y": 440,
+        "wires": [
+            [
+                "5351ea8fb92009e8"
+            ]
+        ]
+    },
+    {
+        "id": "1d2006ba04e7f755",
+        "type": "api-current-state",
+        "z": "faa96027a1de9b63",
+        "name": "Status",
+        "server": "ac20270b.4d8de8",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "{{sonos}}",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "for": 0,
+        "forType": "num",
+        "forUnits": "minutes",
+        "x": 350,
+        "y": 440,
+        "wires": [
+            [
+                "7d57a21cb25e4aec"
+            ]
+        ]
+    },
+    {
+        "id": "a5c538497c4cf16f",
+        "type": "api-call-service",
+        "z": "faa96027a1de9b63",
+        "name": "Send media_{{button}}_track",
+        "server": "ac20270b.4d8de8",
+        "version": 3,
+        "debugenabled": true,
+        "service_domain": "media_player",
+        "service": "media_{{button}}_track",
+        "entityId": "{{sonos}}",
+        "data": "",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 540,
+        "y": 100,
+        "wires": [
+            [
+                "5a0b9a013ac21572"
+            ]
+        ]
+    },
+    {
+        "id": "ae52dedcfff3e430",
+        "type": "api-current-state",
+        "z": "faa96027a1de9b63",
+        "name": "Status",
+        "server": "ac20270b.4d8de8",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "{{sonos}}",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "for": 0,
+        "forType": "num",
+        "forUnits": "minutes",
+        "x": 370,
+        "y": 300,
+        "wires": [
+            [
+                "1642ccc27080ca01"
+            ]
+        ]
+    },
+    {
+        "id": "d067f5f3e267aa3b",
+        "type": "api-current-state",
+        "z": "faa96027a1de9b63",
+        "name": "Status",
+        "server": "ac20270b.4d8de8",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "{{sonos}}",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "for": 0,
+        "forType": "num",
+        "forUnits": "minutes",
+        "x": 370,
+        "y": 180,
+        "wires": [
+            [
+                "5eb82215c0261a16"
+            ]
+        ]
+    },
+    {
+        "id": "ac20270b.4d8de8",
+        "type": "server",
+        "name": "Home Assistant",
+        "version": 2,
+        "addon": true,
+        "rejectUnauthorizedCerts": true,
+        "ha_boolean": "y|yes|true|on|home|open",
+        "connectionDelay": true,
+        "cacheJson": true,
+        "heartbeat": false,
+        "heartbeatInterval": "30"
+    },
+    {
+        "id": "d1e89b3f9ab83806",
+        "type": "comment",
+        "z": "ff87fc0c.05133",
+        "g": "5af774318f0b0278",
+        "name": "Sonos kontroller - trigger bad",
+        "info": "",
+        "x": 200,
+        "y": 2160,
+        "wires": []
+    },
+    {
+        "id": "3b2849c176907070",
+        "type": "change",
+        "z": "ff87fc0c.05133",
+        "g": "5af774318f0b0278",
+        "name": "Settings",
+        "rules": [
+            {
+                "t": "set",
+                "p": "nest_hub",
+                "pt": "msg",
+                "to": "media_player.bad_nest_hub",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "sonos",
+                "pt": "msg",
+                "to": "media_player.bathroom",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "input_boolean_room",
+                "pt": "msg",
+                "to": "bad",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "button",
+                "pt": "msg",
+                "to": "play",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 280,
+        "y": 2220,
+        "wires": [
+            [
+                "bde2b744bf2237f9"
+            ]
+        ]
+    },
+    {
+        "id": "bde2b744bf2237f9",
+        "type": "subflow:faa96027a1de9b63",
+        "z": "ff87fc0c.05133",
+        "g": "5af774318f0b0278",
+        "name": "",
+        "x": 440,
+        "y": 2220,
+        "wires": []
+    },
+    {
+        "id": "73b7612f20d206d8",
+        "type": "server-state-changed",
+        "z": "ff87fc0c.05133",
+        "g": "5af774318f0b0278",
+        "name": "Play",
+        "server": "ac20270b.4d8de8",
+        "version": 3,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityidfilter": "input_boolean.play_bad_sonos",
+        "entityidfiltertype": "exact",
+        "outputinitially": false,
+        "state_type": "str",
+        "haltifstate": "on",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "outputs": 2,
+        "output_only_on_state_change": true,
+        "for": "",
+        "forType": "num",
+        "forUnits": "seconds",
+        "ignorePrevStateNull": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "eventData"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "x": 130,
+        "y": 2220,
+        "wires": [
+            [
+                "3b2849c176907070"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "62395f0ac4427614",
+        "type": "change",
+        "z": "ff87fc0c.05133",
+        "g": "5af774318f0b0278",
+        "name": "Settings",
+        "rules": [
+            {
+                "t": "set",
+                "p": "nest_hub",
+                "pt": "msg",
+                "to": "media_player.bad_nest_hub",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "sonos",
+                "pt": "msg",
+                "to": "media_player.bathroom",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "input_boolean_room",
+                "pt": "msg",
+                "to": "bad",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "button",
+                "pt": "msg",
+                "to": "pause",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 280,
+        "y": 2280,
+        "wires": [
+            [
+                "9750c0c871d942d3"
+            ]
+        ]
+    },
+    {
+        "id": "9750c0c871d942d3",
+        "type": "subflow:faa96027a1de9b63",
+        "z": "ff87fc0c.05133",
+        "g": "5af774318f0b0278",
+        "name": "",
+        "x": 440,
+        "y": 2280,
+        "wires": []
+    },
+    {
+        "id": "a33c9f122e502d06",
+        "type": "server-state-changed",
+        "z": "ff87fc0c.05133",
+        "g": "5af774318f0b0278",
+        "name": "Pause",
+        "server": "ac20270b.4d8de8",
+        "version": 3,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityidfilter": "input_boolean.pause_bad_sonos",
+        "entityidfiltertype": "exact",
+        "outputinitially": false,
+        "state_type": "str",
+        "haltifstate": "on",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "outputs": 2,
+        "output_only_on_state_change": true,
+        "for": "",
+        "forType": "num",
+        "forUnits": "seconds",
+        "ignorePrevStateNull": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "eventData"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "x": 130,
+        "y": 2280,
+        "wires": [
+            [
+                "62395f0ac4427614"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "11a7617229db7c92",
+        "type": "server-state-changed",
+        "z": "ff87fc0c.05133",
+        "g": "5af774318f0b0278",
+        "name": "Previous",
+        "server": "ac20270b.4d8de8",
+        "version": 3,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityidfilter": "input_boolean.previous_bad_sonos",
+        "entityidfiltertype": "exact",
+        "outputinitially": false,
+        "state_type": "str",
+        "haltifstate": "on",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "outputs": 2,
+        "output_only_on_state_change": true,
+        "for": "",
+        "forType": "num",
+        "forUnits": "seconds",
+        "ignorePrevStateNull": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "eventData"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "x": 120,
+        "y": 2340,
+        "wires": [
+            [
+                "ddcd1994163b322d"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "ddcd1994163b322d",
+        "type": "change",
+        "z": "ff87fc0c.05133",
+        "g": "5af774318f0b0278",
+        "name": "Settings",
+        "rules": [
+            {
+                "t": "set",
+                "p": "nest_hub",
+                "pt": "msg",
+                "to": "media_player.bad_nest_hub",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "sonos",
+                "pt": "msg",
+                "to": "media_player.bathroom",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "input_boolean_room",
+                "pt": "msg",
+                "to": "bad",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "button",
+                "pt": "msg",
+                "to": "previous",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 280,
+        "y": 2340,
+        "wires": [
+            [
+                "b0e1a30ef6a89927"
+            ]
+        ]
+    },
+    {
+        "id": "b0e1a30ef6a89927",
+        "type": "subflow:faa96027a1de9b63",
+        "z": "ff87fc0c.05133",
+        "g": "5af774318f0b0278",
+        "name": "",
+        "x": 440,
+        "y": 2340,
+        "wires": []
+    },
+    {
+        "id": "4f38db2eccd35858",
+        "type": "server-state-changed",
+        "z": "ff87fc0c.05133",
+        "g": "5af774318f0b0278",
+        "name": "Next",
+        "server": "ac20270b.4d8de8",
+        "version": 3,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityidfilter": "input_boolean.next_bad_sonos",
+        "entityidfiltertype": "exact",
+        "outputinitially": false,
+        "state_type": "str",
+        "haltifstate": "on",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "outputs": 2,
+        "output_only_on_state_change": true,
+        "for": "",
+        "forType": "num",
+        "forUnits": "seconds",
+        "ignorePrevStateNull": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "eventData"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "x": 130,
+        "y": 2400,
+        "wires": [
+            [
+                "70d6c51ecd261a5b"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "70d6c51ecd261a5b",
+        "type": "change",
+        "z": "ff87fc0c.05133",
+        "g": "5af774318f0b0278",
+        "name": "Settings",
+        "rules": [
+            {
+                "t": "set",
+                "p": "nest_hub",
+                "pt": "msg",
+                "to": "media_player.bad_nest_hub",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "sonos",
+                "pt": "msg",
+                "to": "media_player.bathroom",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "input_boolean_room",
+                "pt": "msg",
+                "to": "bad",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "button",
+                "pt": "msg",
+                "to": "next",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 280,
+        "y": 2400,
+        "wires": [
+            [
+                "5d046d15f1c2fa3a"
+            ]
+        ]
+    },
+    {
+        "id": "5d046d15f1c2fa3a",
+        "type": "subflow:faa96027a1de9b63",
+        "z": "ff87fc0c.05133",
+        "g": "5af774318f0b0278",
+        "name": "",
+        "x": 440,
+        "y": 2400,
+        "wires": []
+    },
+    {
+        "id": "15dcd3c4f278d941",
+        "type": "change",
+        "z": "ff87fc0c.05133",
+        "g": "5af774318f0b0278",
+        "name": "Settings",
+        "rules": [
+            {
+                "t": "set",
+                "p": "nest_hub",
+                "pt": "msg",
+                "to": "media_player.bad_nest_hub",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "sonos",
+                "pt": "msg",
+                "to": "media_player.bathroom",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "input_boolean_room",
+                "pt": "msg",
+                "to": "bad",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "button",
+                "pt": "msg",
+                "to": "shuffle",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 280,
+        "y": 2460,
+        "wires": [
+            [
+                "803d86fd8b427ad1"
+            ]
+        ]
+    },
+    {
+        "id": "803d86fd8b427ad1",
+        "type": "subflow:faa96027a1de9b63",
+        "z": "ff87fc0c.05133",
+        "g": "5af774318f0b0278",
+        "name": "",
+        "x": 440,
+        "y": 2460,
+        "wires": []
+    },
+    {
+        "id": "662473182996af2d",
+        "type": "server-state-changed",
+        "z": "ff87fc0c.05133",
+        "g": "5af774318f0b0278",
+        "name": "Repeat",
+        "server": "ac20270b.4d8de8",
+        "version": 3,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityidfilter": "input_boolean.repeat_bad_sonos",
+        "entityidfiltertype": "exact",
+        "outputinitially": false,
+        "state_type": "str",
+        "haltifstate": "on",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "outputs": 2,
+        "output_only_on_state_change": true,
+        "for": "",
+        "forType": "num",
+        "forUnits": "seconds",
+        "ignorePrevStateNull": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "eventData"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "x": 130,
+        "y": 2520,
+        "wires": [
+            [
+                "8b6a6ab3b285d0fe"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "f30954dae66a026f",
+        "type": "server-state-changed",
+        "z": "ff87fc0c.05133",
+        "g": "5af774318f0b0278",
+        "name": "Vol+",
+        "server": "ac20270b.4d8de8",
+        "version": 3,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityidfilter": "input_boolean.vol_up_bad_sonos",
+        "entityidfiltertype": "exact",
+        "outputinitially": false,
+        "state_type": "str",
+        "haltifstate": "on",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "outputs": 2,
+        "output_only_on_state_change": true,
+        "for": "",
+        "forType": "num",
+        "forUnits": "seconds",
+        "ignorePrevStateNull": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "eventData"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "x": 130,
+        "y": 2580,
+        "wires": [
+            [
+                "d5c27e098e7a6f7f"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "8fa319ed566572a6",
+        "type": "server-state-changed",
+        "z": "ff87fc0c.05133",
+        "g": "5af774318f0b0278",
+        "name": "Vol-",
+        "server": "ac20270b.4d8de8",
+        "version": 3,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityidfilter": "input_boolean.vol_down_bad_sonos",
+        "entityidfiltertype": "exact",
+        "outputinitially": false,
+        "state_type": "str",
+        "haltifstate": "on",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "outputs": 2,
+        "output_only_on_state_change": true,
+        "for": "",
+        "forType": "num",
+        "forUnits": "seconds",
+        "ignorePrevStateNull": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "eventData"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "x": 130,
+        "y": 2640,
+        "wires": [
+            [
+                "9a9efe8f435ec8de"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "8b6a6ab3b285d0fe",
+        "type": "change",
+        "z": "ff87fc0c.05133",
+        "g": "5af774318f0b0278",
+        "name": "Settings",
+        "rules": [
+            {
+                "t": "set",
+                "p": "nest_hub",
+                "pt": "msg",
+                "to": "media_player.bad_nest_hub",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "sonos",
+                "pt": "msg",
+                "to": "media_player.bathroom",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "input_boolean_room",
+                "pt": "msg",
+                "to": "bad",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "button",
+                "pt": "msg",
+                "to": "repeat",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 280,
+        "y": 2520,
+        "wires": [
+            [
+                "61fbcb29fb42addb"
+            ]
+        ]
+    },
+    {
+        "id": "61fbcb29fb42addb",
+        "type": "subflow:faa96027a1de9b63",
+        "z": "ff87fc0c.05133",
+        "g": "5af774318f0b0278",
+        "name": "",
+        "x": 440,
+        "y": 2520,
+        "wires": []
+    },
+    {
+        "id": "d5c27e098e7a6f7f",
+        "type": "change",
+        "z": "ff87fc0c.05133",
+        "g": "5af774318f0b0278",
+        "name": "Settings",
+        "rules": [
+            {
+                "t": "set",
+                "p": "nest_hub",
+                "pt": "msg",
+                "to": "media_player.bad_nest_hub",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "sonos",
+                "pt": "msg",
+                "to": "media_player.bathroom",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "input_boolean_room",
+                "pt": "msg",
+                "to": "bad",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "button",
+                "pt": "msg",
+                "to": "vol_up",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 280,
+        "y": 2580,
+        "wires": [
+            [
+                "b97eef2fe340b586"
+            ]
+        ]
+    },
+    {
+        "id": "b97eef2fe340b586",
+        "type": "subflow:faa96027a1de9b63",
+        "z": "ff87fc0c.05133",
+        "g": "5af774318f0b0278",
+        "name": "",
+        "x": 440,
+        "y": 2580,
+        "wires": []
+    },
+    {
+        "id": "9a9efe8f435ec8de",
+        "type": "change",
+        "z": "ff87fc0c.05133",
+        "g": "5af774318f0b0278",
+        "name": "Settings",
+        "rules": [
+            {
+                "t": "set",
+                "p": "nest_hub",
+                "pt": "msg",
+                "to": "media_player.bad_nest_hub",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "sonos",
+                "pt": "msg",
+                "to": "media_player.bathroom",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "input_boolean_room",
+                "pt": "msg",
+                "to": "bad",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "button",
+                "pt": "msg",
+                "to": "vol_down",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 280,
+        "y": 2640,
+        "wires": [
+            [
+                "046a88898998db46"
+            ]
+        ]
+    },
+    {
+        "id": "046a88898998db46",
+        "type": "subflow:faa96027a1de9b63",
+        "z": "ff87fc0c.05133",
+        "g": "5af774318f0b0278",
+        "name": "",
+        "x": 440,
+        "y": 2640,
+        "wires": []
+    },
+    {
+        "id": "ab3273e87515aa5f",
+        "type": "server-state-changed",
+        "z": "ff87fc0c.05133",
+        "g": "5af774318f0b0278",
+        "name": "Shuffle",
+        "server": "ac20270b.4d8de8",
+        "version": 3,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityidfilter": "input_boolean.shuffle_bad_sonos",
+        "entityidfiltertype": "exact",
+        "outputinitially": false,
+        "state_type": "str",
+        "haltifstate": "on",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "outputs": 2,
+        "output_only_on_state_change": true,
+        "for": "",
+        "forType": "num",
+        "forUnits": "seconds",
+        "ignorePrevStateNull": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "eventData"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "x": 130,
+        "y": 2460,
+        "wires": [
+            [
+                "15dcd3c4f278d941"
+            ],
+            []
+        ]
+    }
+]
