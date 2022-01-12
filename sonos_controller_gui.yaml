@@ -1,0 +1,133 @@
+type: grid
+cards:
+  - type: custom:mini-media-player
+    hide:
+      icon: true
+      source: true
+      power: true
+      volume_level: false
+      shuffle: false
+      repeat: false
+      controls: true
+    speaker_group:
+      platform: sonos
+      show_group_count: true
+      entities:
+        - entity_id: media_player.kjokken
+          name: Kjøkken
+        - entity_id: media_player.bathroom
+          name: Bad
+        - entity_id: media_player.spillrom
+          name: Spillrom
+    shortcuts:
+      columns: 3
+      column_height: 100
+      hide:
+        - null
+      buttons:
+        - name: NRK mP3
+          type: source
+          id: NRK mP3
+        - name: Dance hits
+          type: source
+          id: BPM - Today's Dance Hits
+        - name: P5 Hits
+          type: source
+          id: P5 Hits
+    volume_stateless: false
+    group: false
+    toggle_power: false
+    scale: '1'
+    sound_mode: full
+    artwork: cover
+    entity: media_player.stue
+  - type: grid
+    cards:
+      - type: button
+        tap_action:
+          action: toggle
+        entity: input_boolean.play_stue_sonos
+        name: Play
+        show_name: false
+      - type: button
+        tap_action:
+          action: toggle
+        entity: input_boolean.pause_stue_sonos
+        name: Pause
+        show_name: false
+      - type: button
+        tap_action:
+          action: toggle
+        entity: input_boolean.vol_down_stue_sonos
+        show_name: false
+      - type: button
+        tap_action:
+          action: toggle
+        entity: input_boolean.vol_up_stue_sonos
+        show_name: false
+    columns: 4
+  - type: grid
+    cards:
+      - type: button
+        tap_action:
+          action: toggle
+        entity: input_boolean.previous_stue_sonos
+        show_name: false
+      - type: button
+        tap_action:
+          action: toggle
+        entity: input_boolean.next_stue_sonos
+        show_name: false
+      - type: button
+        tap_action:
+          action: toggle
+        entity: input_boolean.shuffle_stue_sonos
+        show_name: false
+        icon: mdi:shuffle-variant
+      - type: button
+        tap_action:
+          action: toggle
+        entity: input_boolean.repeat_stue_sonos
+        show_name: false
+        icon: mdi:repeat
+    columns: 4
+    square: true
+  - type: grid
+    cards:
+      - type: button
+        tap_action:
+          action: navigate
+          navigation_path: /lovelace-dashboards/sonos-stue-playlists
+        entity: media_player.stue
+        show_icon: false
+        show_name: true
+        name: Flere spillelister
+        hold_action:
+          action: none
+        icon_height: 30px
+      - type: button
+        tap_action:
+          action: navigate
+          navigation_path: /lovelace-dashboards/sonos-stue-playlists-kids
+        entity: media_player.stue
+        show_icon: false
+        show_name: true
+        name: Barnelister
+        hold_action:
+          action: none
+        icon_height: 30px
+    columns: 2
+    square: false
+  - type: button
+    tap_action:
+      action: navigate
+      navigation_path: /lovelace-dashboards/nest-stue
+    entity: media_player.stue
+    show_icon: false
+    show_name: true
+    name: Tilbake
+    hold_action:
+      action: none
+    icon_height: 30px
+columns: 1
+square: false
